@@ -73,3 +73,4 @@ export default function Widgets({ newsResults, randomUsersResults }) {
 		</div>
 	);
 }
+//Yuuri himeno miho ichiki
