@@ -2,7 +2,12 @@
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		domains: ["help.twitter.com", "img.freepik.com", "images.cnbctv18.com"],
+		domains: [
+			"help.twitter.com",
+			"img.freepik.com",
+			"images.cnbctv18.com",
+			"encrypted-tbn0.gstatic.com",
+		],
 	},
 };
 

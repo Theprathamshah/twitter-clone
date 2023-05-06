@@ -74,3 +74,26 @@ export default function Widgets({ newsResults, randomUsersResults }) {
 	);
 }
 //Yuuri himeno miho ichiki
+
+/*
+
+
+Login
+Blog Reviews 
+Sign up
+Subscription
+Create Plan
+Explore
+
+*/
+
+/*
+
+Nextjs
+Tailwind
+Node express
+Mongo DB
+
+Django
+
+*/
