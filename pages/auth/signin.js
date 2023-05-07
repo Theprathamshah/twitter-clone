@@ -1,6 +1,6 @@
 import { getProviders, signIn } from "next-auth/react";
 import Image from "next/image";
-export default function singin({ providers }) {
+export default function signin({ providers }) {
 	return (
 		<div className="flex h-full w-full mt-32 justify-center gap-4">
 			<img
