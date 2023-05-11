@@ -5,13 +5,14 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { ChartBarIcon } from "@heroicons/react/24/outline";
+import Moment from "react-moment";
 
 export default function Post({ post }) {
 	return (
 		<div className="flex items-start p-3 cursor-pointer border-b border-gray-200">
 			{/**imgae */}
 			<Image
-				src={post.userImg}
+				src={post.data().userImg}
 				alt="user image"
 				height={0}
 				width={0}
@@ -24,13 +25,13 @@ export default function Post({ post }) {
 					{/** post user info */}
 					<div className="flex items-center space-x-2 whitespace-nowrap">
 						<h4 className=" font-bold text-[15px] sm:text-[16px] hover:underline">
-							{post.name}
+							{post.data().name}
 						</h4>
 						<span className=" text-sm sm:text-[15px] ">
-							@{post.username} -{" "}
+							@{post.data().username} -{" "}
 						</span>
 						<span className=" text-sm sm:text-[15px] hover:underline">
-							{post.timestamp}
+							<Moment fromNow>{post?.timestamp?.toDate()}</Moment>
 						</span>
 					</div>
 					{/** dot icon */}
@@ -38,16 +39,18 @@ export default function Post({ post }) {
 				</div>
 				{/** post text */}
 				<p className=" text-gray-800 text-[15px]  sm:text-[16px] mb-2">
-					{post.text}
+					{post.data().text}
 				</p>
 				{/** post image */}
-				<Image
-					src={post.img}
-					alt="post image"
-					height={500}
-					width={500}
-					className=" rounded-2xl mr-2"
-				/>
+				{post.data().image && (
+					<Image
+						src={post.data().image}
+						alt="post image"
+						height={500}
+						width={500}
+						className=" rounded-2xl mr-2"
+					/>
+				)}
 				{/** icons*/}
 				<div className="flex  justify-between p-2 text-gray-500 items-center  ">
 					<ChatBubbleOvalLeftEllipsisIcon className="h-9 w-9 hoverEffect p-2 hover:bg-sky-100 hover:text-sky-500" />
@@ -60,3 +63,17 @@ export default function Post({ post }) {
 		</div>
 	);
 }
+
+/*
+
+
+
+11 May 2023 at 15:11:12 UTC+5:30
+userImg
+"https://lh3.googleusercontent.com/a/AGNmyxYsKhyu7WcHYrF-rKdawYmsxNPuMUubpYTCIDfu=s96-c"
+username
+"dankmemer"
+ 
+
+
+-/*/
