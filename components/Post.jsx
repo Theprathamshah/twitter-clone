@@ -5,6 +5,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { HeartIcon } from "@heroicons/react/24/outline";
 import { ShareIcon } from "@heroicons/react/24/outline";
 import { ChartBarIcon } from "@heroicons/react/24/outline";
+import { ref } from "firebase/storage";
 import {
 	collection,
 	deleteDoc,
@@ -12,12 +13,20 @@ import {
 	onSnapshot,
 	setDoc,
 } from "firebase/firestore";
+import { Confirm } from "notiflix";
 import Moment from "react-moment";
-import { db } from "@/firebase";
+import { db, storage } from "@/firebase";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/24/solid";
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { deleteObject } from "firebase/storage";
+import Notiflix from "notiflix";
 export default function Post({ post }) {
+	Notiflix.Confirm.init({
+		titleColor: "rgb(59 130 246)",
+		okButtonBackground: "rgb(59 130 246)",
+	});
+
 	const { data: session } = useSession();
 	const [likes, setLikes] = useState([]);
 	const [hasLiked, setHasLiked] = useState(false);
@@ -27,6 +36,22 @@ export default function Post({ post }) {
 			(snapshot) => setLikes(snapshot.docs)
 		);
 	}, [db]);
+
+	async function deletePost() {
+		Confirm.show(
+			"Delete Post",
+			"Are you sure?",
+			"Yes",
+			"No",
+			() => {
+				deleteDoc(doc(db, "posts", post.id));
+				deleteObject(ref(storage, `posts/${post.id}/image`));
+			},
+			() => {
+				return;
+			}
+		);
+	}
 
 	useEffect(() => {
 		setHasLiked(
@@ -100,7 +125,13 @@ export default function Post({ post }) {
 				{/** icons*/}
 				<div className="flex  justify-between p-2 text-gray-500 items-center  ">
 					<ChatBubbleOvalLeftEllipsisIcon className="h-9 w-9 hoverEffect p-2 hover:bg-sky-100 hover:text-sky-500" />
-					<TrashIcon className="h-9 w-9 hoverEffect p-2  hover:bg-red-100 hover:text-red-600" />
+					{session?.user.uid === post?.data().id && (
+						<TrashIcon
+							onClick={deletePost}
+							className="h-9 w-9 hoverEffect p-2  hover:bg-red-100 hover:text-red-600"
+						/>
+					)}
+
 					<div className=" flex justify-center items-center">
 						{hasLiked ? (
 							<HeartIconFilled
