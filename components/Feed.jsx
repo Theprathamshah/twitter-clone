@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Post from "./Post";
 import { db } from "@/firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { AnimatePresence, motion } from "framer-motion";
 export default function Feed() {
 	const [posts, setPosts] = useState([]);
 	useEffect(
@@ -27,11 +28,23 @@ export default function Feed() {
 				</div>
 			</div>
 			<Input />
-			<div className="">
-				{posts.map((post) => (
-					<Post key={post.id} post={post} />
-				))}
-			</div>
+			<AnimatePresence>
+				<div className="">
+					{posts.map((post) => (
+						<motion.div
+							key={post.id}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{
+								duration: 1,
+							}}
+						>
+							<Post key={post.id} post={post} />
+						</motion.div>
+					))}
+				</div>
+			</AnimatePresence>
 		</div>
 	);
 }

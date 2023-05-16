@@ -5,11 +5,11 @@ export default function signin({ providers }) {
 		<div className="flex h-full w-full mt-32 justify-center gap-4">
 			<img
 				src={
-					"https://o.remove.bg/downloads/22865aba-91b8-4e0f-88c7-51cc6c97ca0c/undraw_Authentication_re_svpt__1_-removebg-preview.png"
+					"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT1r9ccbIGIpHtsNXLKLWKQKnxIzsCLUCPHQ&usqp=CAU"
 				}
-				height={500}
-				width={500}
-				className="hidden  object-cover md:inline-flex object-cover md:w-44 md:h-80"
+				height={900}
+				width={900}
+				className="  rotate-12 mr-10 mt-10 hidden  object-cover md:inline-flex object-cover md:w-44 md:h-80"
 			/>
 			<div className="  ">
 				{Object.values(providers).map((provider) => (
@@ -19,10 +19,10 @@ export default function signin({ providers }) {
 					>
 						<Image
 							src={
-								"https://img.freepik.com/free-icon/twitter_318-674515.jpg"
+								"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBY-TEKQRJRA7Xr4OJXa0GL4y0v1fNnzCKvZ4YnhjEbq7-3dqVuTK0HFaN4V-pCoLJhls&usqp=CAU"
 							}
-							height={100}
-							width={100}
+							height={200}
+							width={200}
 							className=" "
 							alt="Twitter logo"
 						/>

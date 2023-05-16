@@ -12,6 +12,8 @@ import { UserIcon } from "@heroicons/react/24/outline";
 import { EllipsisHorizontalCircleIcon } from "@heroicons/react/24/outline";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/outline";
 import { signIn, useSession } from "next-auth/react";
+
+import { ArrowRightOnRectangleIcon } from "@heroicons/react/24/outline";
 export default function Sidebar() {
 	const { data: session } = useSession();
 	return (
@@ -86,12 +88,18 @@ export default function Sidebar() {
 					</div>
 				</>
 			) : (
-				<button
-					onClick={signIn}
-					className=" bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline"
-				>
-					Sign In
-				</button>
+				<>
+					<button
+						onClick={signIn}
+						className=" bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden  xl:inline"
+					>
+						Sign In
+					</button>
+					<ArrowRightOnRectangleIcon
+						onClick={signIn}
+						className="inline   xl:hidden cursor-pointer h-12 hoverEffect p-2"
+					/>
+				</>
 			)}
 		</div>
 	);
