@@ -13,6 +13,7 @@ import {
 	onSnapshot,
 	setDoc,
 } from "firebase/firestore";
+import { useRecoilState } from "recoil";
 import { Confirm } from "notiflix";
 import Moment from "react-moment";
 import { db, storage } from "@/firebase";
@@ -21,6 +22,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { deleteObject } from "firebase/storage";
 import Notiflix from "notiflix";
+import { modalState } from "@/atom/modalAtom";
 export default function Post({ post }) {
 	Notiflix.Confirm.init({
 		titleColor: "rgb(59 130 246)",
@@ -30,6 +32,7 @@ export default function Post({ post }) {
 	const { data: session } = useSession();
 	const [likes, setLikes] = useState([]);
 	const [hasLiked, setHasLiked] = useState(false);
+	const [open, setOpen] = useRecoilState(modalState);
 	useEffect(() => {
 		const unsubscribe = onSnapshot(
 			collection(db, "posts", post.id, "likes"),
@@ -124,7 +127,10 @@ export default function Post({ post }) {
 				)}
 				{/** icons*/}
 				<div className="flex  justify-between p-2 text-gray-500 items-center  ">
-					<ChatBubbleOvalLeftEllipsisIcon className="h-9 w-9 hoverEffect p-2 hover:bg-sky-100 hover:text-sky-500" />
+					<ChatBubbleOvalLeftEllipsisIcon
+						onClick={() => setOpen(!open)}
+						className="h-9 w-9 hoverEffect p-2 hover:bg-sky-100 hover:text-sky-500"
+					/>
 					{session?.user.uid === post?.data().id && (
 						<TrashIcon
 							onClick={deletePost}
